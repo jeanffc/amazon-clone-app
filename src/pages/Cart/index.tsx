@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from '../../components/Header';
 
-const ProductDetail = () => {
+const Cart = () => {
   return (
     <div>
       <Header />
-      <>ProductDetail</>
+      <>Cart</>
     </div>
   );
 };
 
-export default ProductDetail;
+export default Cart;
