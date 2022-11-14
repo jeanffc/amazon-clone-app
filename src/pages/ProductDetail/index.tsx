@@ -9,14 +9,15 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 
-import Header from '../../components/Header';
-import { Product, Variant } from '../../types';
+import { useCart } from '../../hooks/cart';
+import { CartItem, Product, Variant } from '../../types';
 
 interface ProductDetailProps {
   slug: string;
 }
 
 const ProductDetail: React.FC<ProductDetailProps> = () => {
+  const { addItemToCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [product, setProduct] = useState<Product>();
   const [variant, setVariant] = useState<Variant>();
@@ -29,7 +30,8 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
     try {
       setLoading(true);
       const response = await fetch(`http://localhost:8080/v1/products/${slug}`);
-      const data = await response.json();
+      const data: Product = await response.json();
+
       setProduct(data);
       setVariant(data.variants[0]);
       setLoading(false);
@@ -42,7 +44,19 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
     fetchData();
   }, [slug]);
 
-  const addToCartHandler = () => {};
+  const addToCartHandler = () => {
+    if (product && variant) {
+      const cartItem: CartItem = {
+        productId: product._id,
+        variantId: variant._id,
+        title: variant.title,
+        image: product.image,
+        price: variant.price,
+        quantity: 1
+      };
+      addItemToCart(cartItem);
+    }
+  };
 
   const getColourSelect = () => {
     const colourOptions = product?.variants
@@ -76,7 +90,6 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
 
   return (
     <div>
-      <Header />
       <Container>
         <h1>Product Detail</h1>
         <Row>
@@ -94,6 +107,13 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
                   <ListGroup.Item>Price : ${variant?.price}</ListGroup.Item>
                   <ListGroup.Item>Colour : {getColourSelect()}</ListGroup.Item>
                   <ListGroup.Item>Material : {getMaterialSelect()}</ListGroup.Item>
+                  {/* TODO: check if can customize */}
+                  <ListGroup.Item>
+                    Customize :{' '}
+                    <Form.Group className="mb-3">
+                      <Form.Control type="text" placeholder="Custom text" />
+                    </Form.Group>
+                  </ListGroup.Item>
                   <ListGroup.Item>
                     Description:
                     <div dangerouslySetInnerHTML={{ __html: product.bodyHtml }}></div>
