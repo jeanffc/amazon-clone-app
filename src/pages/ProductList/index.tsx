@@ -4,7 +4,6 @@ import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Header from '../../components/Header';
 import ProductCard from '../../components/ProductCard';
 import { Product } from '../../types';
 
@@ -30,7 +29,6 @@ const ProductList = () => {
 
   return (
     <div>
-      <Header />
       <Container>
         <h1>Product List</h1>
         <Row>
