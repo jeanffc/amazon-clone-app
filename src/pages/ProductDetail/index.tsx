@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -22,6 +22,7 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
   const [product, setProduct] = useState<Product>();
   const [variant, setVariant] = useState<Variant>();
   //   const [selectedImage, setSelectedImage] = useState('');
+  let history = useHistory();
 
   const params = useParams<ProductDetailProps>();
   const { slug } = params;
@@ -55,6 +56,7 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
         quantity: 1
       };
       addItemToCart(cartItem);
+      history.push('/cart');
     }
   };
 

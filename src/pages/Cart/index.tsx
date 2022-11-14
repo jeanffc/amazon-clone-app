@@ -28,7 +28,7 @@ const Cart = () => {
                     <Row className="align-items-center">
                       <Col md={4}>
                         <img src={item.image} alt={item.title} className="img-fluid rounded img-thumbnail" />
-                        <Link to={`/product/${item.productId}`}>{item.title}</Link>
+                        <Link to={`/products/${item.productId}`}>{item.title}</Link>
                       </Col>
                       <Col md={3}>
                         <Button onClick={() => decrease(item)} variant="light">
