@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
 import Spinner from 'react-bootstrap/Spinner';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 import Header from '../../components/Header';
 import ProductCard from '../../components/ProductCard';
 import { Product } from '../../types';
@@ -29,16 +31,18 @@ const ProductList = () => {
   return (
     <div>
       <Header />
-      <>Product List</>
-      <Row>
-        {loading && <Spinner animation="border" />}
-        {!loading &&
-          products?.map((product) => (
-            <Col sm={6} md={4} lg={3} className="mb-3">
-              <ProductCard product={product} />
-            </Col>
-          ))}
-      </Row>
+      <Container>
+        <h1>Product List</h1>
+        <Row>
+          {loading && <Spinner animation="border" />}
+          {!loading &&
+            products?.map((product) => (
+              <Col sm={6} md={4} lg={3} className="mb-3">
+                <ProductCard product={product} />
+              </Col>
+            ))}
+        </Row>
+      </Container>
     </div>
   );
 };

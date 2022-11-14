@@ -13,7 +13,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <Card.Img variant="top" src={product.image} />
       <Card.Body>
         <Card.Title>
-          <Link to={`/products/${product.slug}`}>{product.title}</Link>
+          <Link to={`/products/${product._id}`}>{product.title}</Link>
         </Card.Title>
         <Card.Subtitle>{product.variants[0].price}</Card.Subtitle>
         <Button variant="primary">Add</Button>

@@ -4,7 +4,7 @@ export interface Product {
   bodyHtml: string;
   slug: string;
   image: string;
-  images?: string[];
+  images: string[];
   variants: Variant[];
 }
 
