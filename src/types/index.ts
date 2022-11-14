@@ -15,3 +15,15 @@ export interface Variant {
   material: string;
   price: number;
 }
+
+export interface CartState {
+  cartItems: CartItem[];
+}
+export interface CartItem {
+  productId: string;
+  variantId: string;
+  title: string;
+  image: string;
+  price: number;
+  quantity: number;
+}
