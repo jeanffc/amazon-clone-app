@@ -11,7 +11,7 @@ export interface Product {
 export interface Variant {
   _id: string;
   title: string;
-  colour?: string;
-  material?: string;
+  colour: string;
+  material: string;
   price: number;
 }
