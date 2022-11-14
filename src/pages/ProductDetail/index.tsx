@@ -27,21 +27,20 @@ const ProductDetail: React.FC<ProductDetailProps> = () => {
   const params = useParams<ProductDetailProps>();
   const { slug } = params;
 
-  const fetchData = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(`http://localhost:8080/v1/products/${slug}`);
-      const data: Product = await response.json();
-
-      setProduct(data);
-      setVariant(data.variants[0]);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(`http://localhost:8080/v1/products/${slug}`);
+        const data: Product = await response.json();
+
+        setProduct(data);
+        setVariant(data.variants[0]);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
   }, [slug]);
 

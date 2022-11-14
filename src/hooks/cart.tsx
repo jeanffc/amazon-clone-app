@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import { CartItem, CartState } from '../types';
+import { sumCartItems } from '../utils';
 
 interface CartContextData {
   addItemToCart(cartItem: CartItem): void;
@@ -23,6 +24,7 @@ export const CartProvider: React.FC = ({ children }) => {
   });
 
   const addItemToCart = (cartItem: CartItem) => {
+    // TODO: save localStorage
     setCart((state) => {
       return { ...state, cartItems: [...state.cartItems, cartItem] };
     });
@@ -52,7 +54,33 @@ export const CartProvider: React.FC = ({ children }) => {
     });
   };
 
-  const handleCheckout = () => {};
+  const handleCheckout = async () => {
+    const { total } = sumCartItems(cart.cartItems);
+
+    const data = {
+      orderItems: cart.cartItems,
+      totalPrice: total
+    };
+
+    fetch('http://localhost:8080/v1/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then((response) => {
+        response.json();
+      })
+      .then((data) => {
+        console.log('Success:', data);
+        alert('success');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert(error);
+      });
+  };
 
   return (
     <CartContext.Provider

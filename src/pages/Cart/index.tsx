@@ -9,7 +9,7 @@ import Card from 'react-bootstrap/Card';
 import { useCart } from '../../hooks/cart';
 
 const Cart = () => {
-  const { cartItems, removeItemFromCart, increase, decrease } = useCart();
+  const { cartItems, removeItemFromCart, increase, decrease, handleCheckout } = useCart();
 
   return (
     <div>
@@ -66,7 +66,7 @@ const Cart = () => {
                       <Button
                         type="button"
                         variant="primary"
-                        // onClick={checkoutHandler}
+                        onClick={handleCheckout}
                         disabled={cartItems.length === 0}
                       >
                         Create Order
