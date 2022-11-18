@@ -11,6 +11,16 @@ import { useCart } from '../../hooks/cart';
 const Cart = () => {
   const { cartItems, removeItemFromCart, increase, decrease, handleCheckout } = useCart();
 
+  const calcSumItems = () => {
+    const sumItems = cartItems.reduce((a, c) => a + c.quantity, 0);
+    return sumItems;
+  };
+
+  const calcSubtotal = () => {
+    const subtotal = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
+    return subtotal.toFixed(2);
+  };
+
   return (
     <div>
       <Container>
@@ -57,8 +67,7 @@ const Cart = () => {
                 <ListGroup variant="flush">
                   <ListGroup.Item>
                     <h3>
-                      Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)} items) : $
-                      {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                      Subtotal ({calcSumItems()} items) : {calcSubtotal()}
                     </h3>
                   </ListGroup.Item>
                   <ListGroup.Item>
