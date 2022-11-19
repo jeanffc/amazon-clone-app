@@ -5,15 +5,21 @@ export interface Product {
   slug: string;
   image: string;
   images: string[];
+  options: ProductOption[];
   variants: Variant[];
 }
 
 export interface Variant {
   _id: string;
   title: string;
-  colour: string;
-  material: string;
+  option: object;
   price: number;
+}
+
+export interface ProductOption {
+  _id: string;
+  name: string;
+  values: string[];
 }
 
 export interface CartState {
